@@ -45,7 +45,7 @@ pipeline {
     }
     stage('Archive') {
       steps {
-        archiveArtifacts artifacts: "${APP_DIR}/build/**", fingerprint: true
+        archiveArtifacts artifacts: "build/**", fingerprint: true
       }
     }
   }
