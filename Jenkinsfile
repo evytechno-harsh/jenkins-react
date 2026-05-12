@@ -1,19 +1,25 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:20-alpine'
-      args '-u root:root'
-    }
-  }
+  agent any
   environment {
     CI = 'true'
     APP_DIR = 'react-app'
   }
   stages {
-    stage('Checkout') {
+    // stage('Checkout') {
+    //   steps {
+    //     sh 'apk add --no-cache git'
+    //     checkout scm
+    //   }
+    // }
+
+    stage('Install Node') {
       steps {
-        sh 'apk add --no-cache git'
-        checkout scm
+        sh '''
+          apt-get update
+          apt-get install -y nodejs npm
+          node --version
+          npm --version
+        '''
       }
     }
     stage('Install') {
